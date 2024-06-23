@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, View, Alert } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 import { Slider } from "@miblanchard/react-native-slider";
 import Checkbox from "expo-checkbox";
+import * as Clipboard from "expo-clipboard";
 
 export default function App() {
 	const [password, setPassword] = useState<string>("");
@@ -24,6 +25,11 @@ export default function App() {
 		setPassword(generatedPassword);
 	}, [length, allowNumbers, allowSpecialCharacters]);
 
+	const copyPassword = async () => {
+		await Clipboard.setStringAsync(password);
+		Alert.alert("Password Copied!");
+	};
+
 	useEffect(() => {
 		generatePassword();
 	}, [length, allowNumbers, allowSpecialCharacters]);
@@ -33,12 +39,18 @@ export default function App() {
 			<View style={styles.passwordContainer}>
 				<Text style={styles.headingText}>Your password is: </Text>
 				<Text style={styles.passwordText}>{password}</Text>
-				<Pressable
+				<TouchableOpacity
 					style={styles.buttonContainer}
 					onPress={generatePassword}
 				>
 					<Text style={styles.headingText}>Generate Password</Text>
-				</Pressable>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.buttonContainer}
+					onPress={copyPassword}
+				>
+					<Text style={styles.headingText}>Copy Password</Text>
+				</TouchableOpacity>
 			</View>
 			<StatusBar style="auto" />
 			<View style={styles.controlsMenuContainer}>
@@ -116,6 +128,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		backgroundColor: "#55a0e0",
 		padding: 12,
+		minWidth: "50%",
 		marginTop: 48,
 		borderRadius: 16,
 		justifyContent: "center",

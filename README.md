@@ -1,4 +1,4 @@
-# Magic 8 Ball
+# PasswordCipher
 
 A simple single page password generator made using React Native and Expo.
 
@@ -28,10 +28,10 @@ Considering the dependencies being used in this Expo project, you should be able
 
 ### Installation
 
-1. Clone this Repository, then change directory to the HexSplash directory.
+1. Clone this Repository, then change directory to the PasswordCipher directory.
 
 ```
-https://github.com/ChitrakshTarun/PasswordCipher.git
+git clone https://github.com/ChitrakshTarun/PasswordCipher.git
 ```
 
 ```
